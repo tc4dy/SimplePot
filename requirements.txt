@@ -1,0 +1,4 @@
+aiohttp>=3.8.0
+asyncssh>=2.13.0
+dnspython>=2.3.0
+cryptography>=41.0.0
