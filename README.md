@@ -2,7 +2,7 @@ markdown
 
 # 🍯 SimplePot – See How Attackers Think
 
-> 🧠 *A single‑developer, ~2500‑line educational honeypot – not production‑grade, but fully working and open to your improvements.*
+> 🧠 *A single‑developer with AI, ~2500‑line educational honeypot – not production‑grade, but fully working and open to your improvements.*
 
 **350‑char description:**  
 🔍 Observe live SSH brute‑force, SQLi, DNS tunnelling & more.  
