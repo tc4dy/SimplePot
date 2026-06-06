@@ -1,0 +1,253 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.pyc
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+dist/
+build/
+develop-eggs/
+downloads/
+eggs/
+parts/
+sdist/
+var/
+wheels/
+*.whl
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv
+.virtualenv
+venv.bak/
+env.bak/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.suo
+*.user
+*.sln
+*.sublime-*
+.project
+.pydevproject
+.settings/
+
+# Honeypot Data Directory (KRİTİK - tüm veriler burada)
+/honeypot_data/
+/tmp/honeypot_data/
+/honeypot_data_*/
+data/
+honeypot.db
+honeypot.db-*
+
+# Database files
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+*.db-shm
+*.db-wal
+
+# Session data
+sessions/
+*.session
+*.sess
+session_data/
+
+# Captured payloads and credentials
+payloads/
+captured_credentials.txt
+credentials.log
+captured/*
+!captured/.gitkeep
+
+# Reports and exports
+reports/
+*.report.json
+*.report.html
+*.export.json
+*.stix.json
+hourly_*.json
+export_*.json
+*.stix
+
+# Log files
+*.log
+logs/
+*.log.*
+*.out
+*.err
+honeypot_*.log
+*.pid
+
+# Certificates and keys (GÜVENLİK KRİTİK)
+keys/
+*.key
+*.pem
+*.crt
+*.p12
+*.pfx
+*.csr
+certs/
+!keys/.gitkeep
+!certs/.gitkeep
+ssh_host_key
+ssh_host_*
+server.key
+server.crt
+
+# Configuration files (sensitive)
+config.ini
+.secrets
+.env
+.env.local
+*.conf
+!example.conf
+
+# Attack artifacts
+attacks/
+malware_samples/
+*.malware
+*.suspicious
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+*.old
+*~
+*.cache
+temp_*
+/tmp/*
+!tmp/.gitkeep
+
+# OS files
+Thumbs.db
+desktop.ini
+.DS_Store
+ehthumbs.db
+.directory
+.Trashes
+
+# Testing
+test_*
+*_test.py
+tests/__pycache__/
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.mypy_cache/
+.ruff_cache/
+*.cover
+
+# Docker (eğer kullanılırsa)
+docker-compose.override.yml
+Dockerfile.local
+.dockerignore
+
+# Environment variables
+.env
+.env.*
+!.env.example
+*.env
+secrets.env
+
+# Monitoring data
+prometheus/
+metrics.db
+*.prom
+
+# Network captures
+*.pcap
+*.cap
+*.pcapng
+*.dump
+captures/
+!captures/.gitkeep
+
+# Backup files
+backups/
+*.backup
+*.dump
+*.sql
+
+# Large files
+*.tar
+*.gz
+*.bz2
+*.7z
+*.zip
+*.rar
+
+# Known malicious patterns (sample files)
+known_malicious/
+blacklist_ips.txt
+blacklist_domains.txt
+
+# GeoIP databases (opsiyonel)
+GeoLite2-*.mmdb
+*.mmdb
+
+# Process files
+*.pid
+*.sock
+*.socket
+*.lock
+
+# Memory dumps
+*.heap
+*.core
+*.dump
+
+# IDE specific
+.vscode/
+.idea/
+*.iml
+.project
+.classpath
+
+# Log rotation
+*.1
+*.2
+*.3
+*.gz
+*.old
+
+# Security (ignore everything sensitive)
+.secrets/
+.credentials/
+keys_private/
+production_config/
+*.secret
+*.token
+
+# System files
+.directory
+.spotlight
+.fseventsd
+.metadata_never_index
+
+# Network scan artifacts
+nmap_scan.xml
+*.gnmap
+masscan_output.txt
+
+# Exfiltration data
+exfil/
+stolen_data/
+leaked_data/
