@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  simplepot:
+    build: .
+    container_name: simplepot
+    restart: unless-stopped
+    network_mode: host  # Required for iptables and to avoid port mapping issues
+    # Alternative: use bridge network with port mapping (iptables may not work)
+    # ports:
+    #   - "2222:2222" "8080:8080" "8443:8443" "2121:2121" "3306:3306"
+    #   - "2525:2525" "2323:2323" "6379:6379" "502:502" "5353:5353"
+    #   - "1610:1610/udp" "7777:7777" "9091:9091"
+    volumes:
+      # Persist data
+      - simplepot-data:/tmp/honeypot_data
+      - simplepot-logs:/tmp/honeypot_logs
+      # Optional: mount custom config (if you split config later)
+      # - ./config.yaml:/app/config.yaml:ro
+    environment:
+      # Alerting (optional - set in .env)
+      - WEBHOOK_URL=${WEBHOOK_URL:-}
+      - SLACK_WEBHOOK=${SLACK_WEBHOOK:-}
+      - TELEGRAM_TOKEN=${TELEGRAM_TOKEN:-}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID:-}
+      # Python unbuffered output for better logging
+      - PYTHONUNBUFFERED=1
+    # Required for iptables (active defense)
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+      - NET_BIND_SERVICE
+    # Or run as root (not recommended, but needed for iptables)
+    # user: root
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    labels:
+      - "com.simplepot.description=Educational Honeypot"
+      - "com.simplepot.version=1.0"
+    # For production, add resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+
+volumes:
+  simplepot-data:
+    name: simplepot_data
+  simplepot-logs:
+    name: simplepot_logs
+
+networks:
+  default:
+    name: simplepot_network
