@@ -2,7 +2,7 @@
 
 # 🍯 SimplePot – See How Attackers Think
 
-> 🧠 *A single‑developer with AI, ~2500‑line educational honeypot – not production‑grade, but fully working and open to your improvements.*
+> 🧠 *A training honeypot of approximately 2,500 lines of code, suitable for IT companies, researchers, and developers—fully functional and open to your improvements, with a configuration that could be adapted for a production environment.*
 
 **350‑char description:**  
 🔍 Observe live SSH brute‑force, SQLi, DNS tunnelling & more.  
