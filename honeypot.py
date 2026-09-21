@@ -699,7 +699,7 @@ class AlertManager:
     async def send_alert(self, ip: str, alert_type: str, threat_score: int, details: str):
         if not self._should_alert(ip):
             return
-        message = f'🚨 HONEYPOT ALERT\nType: {alert_type}\nIP: {anonymize_ip(ip)}\nScore: {threat_score}/100\nDetails: {details[:200]}'
+        message = f'[!] HONEYPOT ALERT\nType: {alert_type}\nIP: {anonymize_ip(ip)}\nScore: {threat_score}/100\nDetails: {details[:200]}'
         self.db.log_alert(ip, alert_type, threat_score, details)
         tasks = []
         if CONFIG.get('slack_webhook'):
@@ -1203,7 +1203,7 @@ class SSHSession(asyncssh.SSHServerSession):
             parts = cmd_lower.split()
             if len(parts) >= 3:
                 service = parts[2]
-                return f'● {service}.service\r\n   Loaded: loaded (/lib/systemd/system/{service}.service; enabled)\r\n   Active: active (running)\r\n'
+                return f'[*] {service}.service\r\n   Loaded: loaded (/lib/systemd/system/{service}.service; enabled)\r\n   Active: active (running)\r\n'
             return ''
         first_word = cmd.split()[0] if cmd.split() else ''
         return f'-bash: {sanitize_log_input(first_word, 50)}: command not found\r\n' if first_word else ''
@@ -2075,7 +2075,7 @@ tr:hover td{{background:#1a2235}}
 <h2>Top Attackers</h2>
 <table>
 <tr><th>IP (Anonymized)</th><th>Events</th><th>Threat Score</th><th>MITRE Techniques</th><th>Status</th></tr>
-{"".join(f'<tr><td>{a["ip_address"]}</td><td>{a["event_count"]}</td><td><span class="badge {"high" if a["threat_score"]>=70 else "med" if a["threat_score"]>=40 else "low"}">{a["threat_score"]}</span></td><td>-</td><td>{"🚫 BANNED" if a["is_banned"] else "👁 Monitored"}</td></tr>' for a in stats.get("top_attackers",[])[:10])}
+{"".join(f'<tr><td>{a["ip_address"]}</td><td>{a["event_count"]}</td><td><span class="badge {"high" if a["threat_score"]>=70 else "med" if a["threat_score"]>=40 else "low"}">{a["threat_score"]}</span></td><td>-</td><td>{"[-] BANNED" if a["is_banned"] else "[+] Monitored"}</td></tr>' for a in stats.get("top_attackers",[])[:10])}
 </table>
 </div>
 <div class="section">
@@ -2092,7 +2092,7 @@ tr:hover td{{background:#1a2235}}
 {"".join(f'<tr><td>{proto}</td><td>{count:,}</td></tr>' for proto,count in stats.get("events_by_protocol",{}).items())}
 </table>
 </div>
-<button class="refresh" onclick="location.reload()">↺ REFRESH</button>
+<button class="refresh" onclick="location.reload()">[R] REFRESH</button>
 </body></html>'''
         return aiohttp.web.Response(text=html, content_type='text/html')
 
