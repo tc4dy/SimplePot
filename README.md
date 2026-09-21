@@ -1,20 +1,20 @@
 ![Logo](sp.svg)
 
-# 🍯 SimplePot – See How Attackers Think
+# SimplePot – See How Attackers Think & Defend
 
-> 🧠 *A training honeypot of approximately 2,500 lines of code, suitable for **IT companies, researchers, and developers—fully** functional and open to your improvements, with a configuration that could be adapted for a production environment. **(Translated by AI into a single file for user convenience.) The file was merged using AI, and infrastructure, output support, and modular editing were implemented.** *
+>  *An MMP (Minimum Marketable Product) honeypot consisting of approximately 2,500 lines of code—suitable for IT companies, researchers, and developers—featuring a fully functional design that is open to further development and adaptable for production environments. **(For ease of use, the modular components have been consolidated into a single file for developers.)** This single-file version integrates AI support while retaining identical functionality. *
 
 **350‑char description:**  
 🔍 Observe live SSH brute‑force, SQLi, DNS tunnelling & more.  
-📡 12+ protocols (HTTP/SSH/FTP/MySQL/Redis/DNS/SNMP/Modbus/WebSocket).  
+📡 12+ protocols (HTTP/SSH/FTP/Redis/DNS/SNMP/Modbus/WebSocket).  
 📊 SQLite + live dashboard + MITRE ATT&CK mapping.  
 🛠️ Clone, run, learn, extend. **Not a commercial product – a learning toolkit.**  
 
-🔗 **Clone:** `git clone https://github.com/tc4dy/SimplePot`  
+ **Clone:** `git clone https://github.com/tc4dy/SimplePot`  
 
 ---
 
-## 📌 What is this?
+## [?] What is this?
 
 **SimplePot** is a low‑interaction honeypot written from scratch in Python asyncio.  
 It simulates common network services, logs every attacker action, and maps events to MITRE ATT&CK techniques.
@@ -25,7 +25,7 @@ The code is ~2500 lines, monolithic by design – so you can read, modify, and i
 
 ---
 
-## 🧠 Educational goals
+## [+] MMP and Educational Goals
 
 - See **exactly what credentials** attackers try (SSH, FTP, MySQL, SMTP, HTTP forms).
 - Watch **live commands** on a fake shell (`id`, `wget`, `cat /etc/passwd`).
@@ -36,7 +36,7 @@ The code is ~2500 lines, monolithic by design – so you can read, modify, and i
 
 ---
 
-## 🚀 What works (and what doesn’t)
+## What works (and what doesn’t)
 
 | ✅ Works (tested) | ❌ Not implemented (by design) |
 |------------------|--------------------------------|
@@ -53,7 +53,7 @@ The code is ~2500 lines, monolithic by design – so you can read, modify, and i
 
 ---
 
-## 🔧 How it works (the logic, step by step)
+##  How it works (the logic, step by step)
 
 1. **Service emulation** – each protocol runs in an `asyncio` server.
 2. **Connection** – logs source IP, creates a session, checks rate‑limits / bans.
@@ -74,7 +74,7 @@ All fake banners, files, SSH command responses are plain Python data structures 
 
 ---
 
-## 📥 Installation & first run
+## [%] Installation & first run
 
 ```bash
 git clone https://github.com/tc4dy/SimplePot
