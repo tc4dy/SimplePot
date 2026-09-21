@@ -1,6 +1,6 @@
 ![Logo](sp.svg)
 
-# SimplePot – See How Attackers Think & Defend
+# SimplePot – MVP & Basic, Educational Honeypot
 
 >  *An MVP (Minimum Viable Product) honeypot consisting of approximately 2,500 lines of code—suitable for IT companies, researchers, and developers—featuring a fully functional design that is open to further development and adaptable for production environments. **(For ease of use, the modular components have been consolidated into a single file for developers.)** This single-file version integrates AI support while retaining identical functionality. *
 
