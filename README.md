@@ -2,7 +2,7 @@
 
 # SimplePot – See How Attackers Think & Defend
 
->  *An MMP (Minimum Marketable Product) honeypot consisting of approximately 2,500 lines of code—suitable for IT companies, researchers, and developers—featuring a fully functional design that is open to further development and adaptable for production environments. **(For ease of use, the modular components have been consolidated into a single file for developers.)** This single-file version integrates AI support while retaining identical functionality. *
+>  *An MVP (Minimum Viable Product) honeypot consisting of approximately 2,500 lines of code—suitable for IT companies, researchers, and developers—featuring a fully functional design that is open to further development and adaptable for production environments. **(For ease of use, the modular components have been consolidated into a single file for developers.)** This single-file version integrates AI support while retaining identical functionality. *
 
 **350‑char description:**  
 🔍 Observe live SSH brute‑force, SQLi, DNS tunnelling & more.  
@@ -25,7 +25,7 @@ The code is ~2500 lines, monolithic by design – so you can read, modify, and i
 
 ---
 
-## [+] MMP and Educational Goals
+## [+] MVP and Educational Goals
 
 - See **exactly what credentials** attackers try (SSH, FTP, MySQL, SMTP, HTTP forms).
 - Watch **live commands** on a fake shell (`id`, `wget`, `cat /etc/passwd`).
@@ -36,20 +36,36 @@ The code is ~2500 lines, monolithic by design – so you can read, modify, and i
 
 ---
 
-## What works (and what doesn’t)
+## Capabilities
 
-| ✅ Works (tested) | ❌ Not implemented (by design) |
-|------------------|--------------------------------|
-| SSH, HTTP, HTTPS, FTP, MySQL, SMTP, Redis, Modbus, DNS (TCP+UDP), SNMP, WebSocket | Malware capture / file storage |
-| Credential logging + live dashboard | PostgreSQL / Elastic stack |
-| MITRE ATT&CK technique mapping | IPv6 full support (basic only) |
-| Slack / Telegram / webhook alerts | GeoIP / Tor detection (stubs) |
-| IP banning via iptables | Docker / Kubernetes manifests |
-| Prometheus metrics (`/metrics`) | High‑performance (SQLite is fine for learning) |
-| GDPR‑compliant IP anonymisation | Multi‑tenant / cloud‑ready |
+SimplePot focuses on **detection, learning, and transparency**. Here's what
+runs out-of-the-box today:
 
-> The code is **working and stable** for moderate traffic (hundreds of events/minute).  
-> For massive production workloads, use T‑Pot or Cowrie – but for **learning and experimenting**, this is perfect.
+**Protocols (11 total)**
+- SSH · HTTP · HTTPS · FTP · MySQL · SMTP · Redis · Modbus · DNS (TCP + UDP) · SNMP · WebSocket
+
+**Detection & intelligence**
+- Payload pattern matching (SQLi, XSS, LFI, RCE, WebShell, cryptomining, botnet, DNS tunnelling)
+- Threat scoring (0–100) combining behaviour, frequency, and known-bad indicators
+- MITRE ATT&CK mapping — 25+ techniques across 8 tactics
+- Per-IP attacker profiling (credentials, commands, protocols, techniques)
+
+**Operations**
+- Live web dashboard with real-time stats
+- Prometheus metrics endpoint (`/metrics`)
+- Slack, Telegram, and generic webhook alerting
+- SQLite persistence (WAL mode, batched writes)
+- GDPR-friendly IP anonymisation in logs and exports
+- STIX 2.1 export for threat-intel sharing
+
+**Defence**
+- Rate limiting per IP
+- Automatic `iptables` banning above threat threshold
+- Configurable session timeouts and tarpitting
+
+> Designed for **moderate traffic** (hundreds of events/minute) on a single
+> node — enough for a home lab, a research VM, or a small office network.
+> For massive-scale production, pair it with T-Pot or Cowrie.
 
 ---
 
@@ -81,14 +97,15 @@ git clone https://github.com/tc4dy/SimplePot
 cd SimplePot
 pip install aiohttp asyncssh dnspython cryptography
 sudo python3 simplepot.py   # sudo needed only for iptables banning
-
+```
 Ports used (change in CONFIG dict):
 2222 (SSH), 8080 (HTTP), 8443 (HTTPS), 2121 (FTP), 3306 (MySQL), 2525 (SMTP), 6379 (Redis), 502 (Modbus), 5353 (DNS), 1610 (SNMP).
 Dashboard: http://localhost:7777
 Prometheus metrics: http://localhost:7777/metrics
-🧪 Try it yourself
-bash
 
+🧪 Try it yourself
+
+```bash
 # SSH brute‑force simulation
 ssh -p 2222 root@localhost          # any password works for root
 
@@ -100,9 +117,10 @@ dig @localhost -p 5353 a.very.long.subdomain.that.looks.suspicious.example.com
 
 # Modbus ICS scan
 nmap -p 502 --script modbus-discover localhost
+```
 
 Open the dashboard – every event appears with a threat score and MITRE tags.
-📂 Project structure (single file – easy to explore)
+Project structure (single file – easy to explore)
 text
 
 simplepot.py           # all classes and logic (~2500 lines)
@@ -112,27 +130,41 @@ simplepot.py           # all classes and logic (~2500 lines)
   └── certs/           # self‑signed TLS cert for HTTPS
 
 Because everything is in one file, you can search, modify, and run without context‑switching – ideal for learning.
-🔐 Environment variables for alerts
-bash
+Environment variables for alerts
 
+```bash
 export SLACK_WEBHOOK="https://hooks.slack.com/..."
 export TELEGRAM_TOKEN="123456:ABC"
 export TELEGRAM_CHAT_ID="-123456"
 export WEBHOOK_URL="https://your-endpoint.com/alert"
+```
 
-🤝 Contributing & extending
+## Roadmap
 
-This project is open to your improvements.
-You can:
+SimplePot is an MVP. The roadmap below reflects **what I plan to add**, in
+rough priority order. No dates — this is a side project.
 
-    Add new protocols (LDAP, RDP, VNC – stubs are already in CONFIG).
+### Short term
+- [ ] `config.yaml` support (no more editing the Python file)
+- [ ] Dashboard basic auth (single user, token-based)
+- [ ] Dockerfile + `docker-compose.yml`
+- [ ] Persistent log path via environment variable
+- [ ] JSON structured logging option
 
-    Implement GeoIP with Maxmind DB.
+### Mid term
+- [ ] Unit tests with `pytest` (DB, scoring, MITRE mapping)
+- [ ] Per-endpoint alert tuning (Slack / Telegram / webhook)
+- [ ] GeoIP enrichment (optional, offline database)
+- [ ] Tor exit-node detection (bulk list)
+- [ ] Prometheus exporter improvements (histograms, per-protocol counters)
 
-    Replace SQLite with PostgreSQL.
+### Long term (maybe)
+- [ ] Plugin system for custom honeypot services
+- [ ] Helm chart
+- [ ] Full IPv6 support
+- [ ] Postgres backend (optional, for multi-node)
+- [ ] Malware payload capture with safe storage
 
-    Write a Dockerfile.
+## License
 
-    Fix the few rough edges (IPv6, session replay, etc.).
-
-The code is written to be read – not to be the “perfect” architecture.
+MIT License — see [`LICENSE`](LICENSE) for the full text :p
