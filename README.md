@@ -8,7 +8,7 @@
 🔍 Observe live SSH brute‑force, SQLi, DNS tunnelling & more.  
 📡 12+ protocols (HTTP/SSH/FTP/Redis/DNS/SNMP/Modbus/WebSocket).  
 📊 SQLite + live dashboard + MITRE ATT&CK mapping.  
-🛠️ Clone, run, learn, extend. **Not a commercial product – a learning toolkit.**  
+🛠️ Clone, run, learn, extend. **Not a commercial product – a MVP and educational toolkit.**  
 
  **Clone:** `git clone https://github.com/tc4dy/SimplePot`  
 
@@ -139,31 +139,36 @@ export TELEGRAM_CHAT_ID="-123456"
 export WEBHOOK_URL="https://your-endpoint.com/alert"
 ```
 
-## Roadmap
+## Use Cases
 
-SimplePot is an MVP. The roadmap below reflects **what I plan to add**, in
-rough priority order. No dates — this is a side project.
+SimplePot is not a single-purpose tool. Here's what people actually do with it:
 
-### Short term
-- [ ] `config.yaml` support (no more editing the Python file)
-- [ ] Dashboard basic auth (single user, token-based)
-- [ ] Dockerfile + `docker-compose.yml`
-- [ ] Persistent log path via environment variable
-- [ ] JSON structured logging option
+**Home lab / self-hosting**
+> You run a VPS or a Raspberry Pi at home. You want to know who's knocking
+> on your door. SimplePot shows you every probe, credential, and payload —
+> in real time.
 
-### Mid term
-- [ ] Unit tests with `pytest` (DB, scoring, MITRE mapping)
-- [ ] Per-endpoint alert tuning (Slack / Telegram / webhook)
-- [ ] GeoIP enrichment (optional, offline database)
-- [ ] Tor exit-node detection (bulk list)
-- [ ] Prometheus exporter improvements (histograms, per-protocol counters)
+**Blue team training**
+> You're learning detection engineering. You feed SimplePot's logs into your
+> SIEM, write rules against MITRE techniques, and measure false positives
+> against real (fake) traffic.
 
-### Long term (maybe)
-- [ ] Plugin system for custom honeypot services
-- [ ] Helm chart
-- [ ] Full IPv6 support
-- [ ] Postgres backend (optional, for multi-node)
-- [ ] Malware payload capture with safe storage
+**Security research**
+> You study attacker TTPs. SimplePot captures raw payloads, command
+> sequences, and timing — enough to build a dataset without touching real
+> infrastructure.
+
+**Red team / pentest prep**
+> You want to test your own tooling against a target that logs everything.
+> SimplePot is a safe, disposable bullseye.
+
+**Teaching / workshops**
+> You're running a security class. Students SSH in, run commands, see
+> events pop up on the dashboard. Instant feedback loop.
+
+**Threat intel collection**
+> You export STIX 2.1 bundles and feed them into MISP, OpenCTI, or any
+> TIP that speaks STIX.
 
 ## License
 
